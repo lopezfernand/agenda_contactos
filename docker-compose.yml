@@ -1,0 +1,6 @@
+services:
+  app:
+    build: .
+    container_name: agenda_contactos_app
+    ports:
+      - "5001:5001"
