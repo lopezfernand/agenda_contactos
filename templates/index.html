@@ -7,6 +7,25 @@
 </head>
 <body>
   <h1>Agenda de contactos</h1>
-  <p>Proyecto nuevo para Jenkins, Docker y Swarm.</p>
+
+  <a href="/nuevo">Agregar nuevo contacto</a>
+
+  <hr>
+
+  {% if contactos %}
+    <ul>
+      {% for contacto in contactos %}
+        <li>
+          <strong>{{ contacto.nombre }}</strong><br>
+          Teléfono: {{ contacto.telefono }}<br>
+          Correo: {{ contacto.correo }}<br>
+          Dirección: {{ contacto.direccion }}
+        </li>
+        <br>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay contactos registrados todavía.</p>
+  {% endif %}
 </body>
 </html>
