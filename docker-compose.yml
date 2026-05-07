@@ -1,6 +1,32 @@
 services:
+  db:
+    image: postgres:16
+    container_name: agenda_db
+    environment:
+      POSTGRES_DB: agenda_db
+      POSTGRES_USER: agenda_user
+      POSTGRES_PASSWORD: agenda_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - red_bd
+
   app:
     build: .
     container_name: agenda_contactos_app
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://agenda_user:agenda_pass@db:5432/agenda_db
     ports:
       - "5001:5001"
+    networks:
+      - red_bd
+
+volumes:
+  postgres_data:
+
+networks:
+  red_bd:
+    driver: bridge
+    
